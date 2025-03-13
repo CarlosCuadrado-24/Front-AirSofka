@@ -11,10 +11,10 @@ import { IUser } from '../../../../domain/model/user.model';
   styles: ''
 })
 export class RegisterContainerComponent implements OnInit, OnDestroy{
-  // private route = inject(ActivatedRoute);
+  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private createUserUseCase = inject(CreateUserUseCase);
-  
+
 
   ngOnInit(): void {
     this.createUserUseCase.initSubscriptions();
@@ -36,3 +36,4 @@ export class RegisterContainerComponent implements OnInit, OnDestroy{
   }
 
 }
+

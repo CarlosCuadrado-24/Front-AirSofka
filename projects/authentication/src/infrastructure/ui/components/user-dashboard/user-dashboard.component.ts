@@ -11,7 +11,7 @@ import { NgFor } from '@angular/common';
 export class UserDashboardComponent {
   public users = input.required<IUser[]>();
   public onCreateUser = output<IUser>();
-
+  public onUpdateUser = output<string>();
 
   private newUser: IUser = {
     name: "Nuevo Usuario",
@@ -25,4 +25,10 @@ export class UserDashboardComponent {
   createUser() {
     this.onCreateUser.emit(this.newUser);
   }
+
+  updateUser(email: string) {
+    this.onUpdateUser.emit(email);
+  }
+
 }
+
