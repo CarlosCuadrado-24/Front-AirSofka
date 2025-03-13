@@ -1,0 +1,52 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
+
+.flight-type {
+  @include mixins.typography-base;
+  background-color: variables.$white;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 15%;
+  width: 100dvw;
+  border-bottom: 1px solid variables.$gray-light;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__title {
+    color: variables.$blue;
+    font-size: 3.5rem;
+    font-weight: 600;
+  }
+
+  &__date {
+    margin-top: -8px;
+    color: variables.$gray;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    color: variables.$gray;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    &:hover {
+      transition: color 0.3s ease;
+      cursor: pointer;
+      color: variables.$blue-light;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
+
+.flights {
+  @include mixins.typography-base;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100dvw;
+  background-color: variables.$white;
+  padding: 30px 15%;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    background-color: variables.$gray-light-2;
+    border: 1px solid variables.$gray-light;
+  }
+
+  &__icon {
+    background-color: variables.$blue-dark-2;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 0 0 10px;
+  }
+
+  &__title {
+    color: variables.$blue-dark-2;
+    font-size: 1.6rem;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+
+    &-sort {
+      display: flex;
+      align-items: center;
+      border: 1px solid variables.$blue-dark;
+      color: variables.$blue-dark;
+      padding: 8px 40px;
+      border-radius: 8px;
+      background-color: transparent;
+
+      svg {
+        fill: variables.$blue-dark;
+      }
+
+      span {
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: variables.$blue-dark;
+        color: variables.$white;
+
+        svg {
+          fill: variables.$white;
+        }
+      }
+    }
+
+    &-type {
+      width: 55%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 50px;
+        gap: 8px;
+
+        img {
+          width: 30px;
+        }
+
+        span {
+          font-size: 1.6rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

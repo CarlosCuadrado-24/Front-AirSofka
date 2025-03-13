@@ -1,0 +1,16 @@
+<div class="flight-type">
+  <div class="flight-type__container">
+    <img class="flight-type__image" src="home/BOS.jpg" alt="Vuelo de">
+
+    <div class="flight-type__info">
+      <h1 class="flight-type__title">Seleccionar vuelo de {{text}}</h1>
+      @if (text === 'ida') {
+        <h3 class="flight-type__date">{{form?.dates?.departure || '' | date: 'EEE, MMM, d, y'}} · Hacia {{form?.destination?.name || ''}}</h3>
+      } @else {
+        <h3 class="flight-type__date">{{form?.dates?.return || '' | date: 'EEE, MMM, d, y'}} · Hacia {{form?.origin?.name || ''}}</h3>
+      }
+    </div>
+  </div>
+
+  <button class="flight-type__button">Búsqueda flexible ></button>
+</div>

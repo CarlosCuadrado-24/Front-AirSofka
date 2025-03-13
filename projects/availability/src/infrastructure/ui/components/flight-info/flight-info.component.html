@@ -1,0 +1,104 @@
+<section class="flight">
+  <div class="flight__detail">
+    <header class="flight__detail-header">
+      <span>{{flightNumber}}</span>
+    </header>
+
+    <main class="flight__detail-main">
+      <div class="flight__detail-main-hours">
+        <span>{{departureTime | date:'hh:mm a'}}</span>
+        <div class="flight__detail-main-hours-line"></div>
+        <span class="flight__detail-main-hours-time">{{duration}}</span>
+        <div class="flight__detail-main-hours-line"></div>
+        <span>{{arrivalTime | date:'hh:mm a'}}</span>
+      </div>
+
+      <div class="flight__detail-main-cities">
+        <span>{{form?.origin?.name}}({{form?.origin?.abbreviation}})</span>
+        <span>{{form?.destination?.name}}({{form?.destination?.abbreviation}})</span>
+      </div>
+    </main>
+
+    <footer class="flight__detail-footer">
+      <span class="flight__detail-footer-airline">Operado: Air Sofka</span>
+      <button class="flight__detail-footer-details">Ver detalles ></button>
+    </footer>
+  </div>
+
+  <div class="flight__class">
+    <button class="flight__class-button flight__class-button--economic" 
+    (click)="toggleClass('economic')"
+    [ngClass]="{'selected-economic': isEconomicActive}">
+      <div class="flight__class-line"></div>
+      <div class="flight__class-info">
+        <h2 class="flight__class-title">Desde</h2>
+        <span class="flight__class-price">{{standardTotalPrice | currency:'COP':'code':'1.0-0'}}</span>
+        <h2 class="flight__class-title">Ida · Por adulto</h2>
+      </div>
+    </button>
+
+    <button class="flight__class-button flight__class-button--executive" 
+    (click)="toggleClass('executive')"
+    [ngClass]="{'selected-executive': isExecutiveActive}">
+      <div class="flight__class-line flight__class-line--dark"></div>
+      <div class="flight__class-info">
+        <h2 class="flight__class-title">Desde</h2>
+        <span class="flight__class-price">{{executiveTotalPrice | currency:'COP':'code':'1.0-0'}}</span>
+        <h2 class="flight__class-title">Ida · Por adulto</h2>
+      </div>
+    </button>
+  </div>
+</section>
+
+<div class="class class--economic" [ngClass]="{'active': isEconomicActive}">
+  @for (card of economicClassCards; track $index) {
+    <lib-class-card
+      [type]="card.type"
+      [description]="card.description"
+      [price]="card.price"
+      [conditions]="card.conditions"
+      [others]="card.others"
+      [colorHeader]="card.colorHeader"
+      (onSelect)="onCardSelected($event)"
+    ></lib-class-card>
+  }
+
+  <div class="class-info">
+    <h1 class="class-info__title">Detalle de tarifas</h1>
+    <ul class="class-info__list">
+      <li class="class-info__item">El primer cambio sin penalidad es aplicable si se realiza al menos ocho días antes de la fecha de salida*.</li>
+      <li class="class-info__item">Los beneficios PreferMember varían dependiendo del <span>estatus del miembro.</span> Los PreferMembers Silver que compren tarifas Economy Basic no son elegibles para ascensos de cortesía**.</li>
+      <li class="class-info__item">Los precios mostrados incluyen cargos de combustible, impuestos y tasas.</li>
+      <li class="class-info__item">Consulta nuestra <span>política de equipaje</span> para vuelos operados por Copa Airlines. Pueden aplicar cargos adicionales en maletas extras, con sobrepeso, o sobredimensión, así como a ciertos artículos especiales.</li>
+      <li class="class-info__item">Si seleccionas <span>familias tarifarias</span> diferentes en tu vuelo de ida y de regreso, se aplicarán los atributos más restrictivos.</li>
+      <li class="class-info__item">No presentarse al vuelo conlleva penalidades.</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="class class--executive" [ngClass]="{'active': isExecutiveActive}">
+  @for (card of executiveClassCards; track $index) {
+    <lib-class-card
+      [type]="card.type"
+      [description]="card.description"
+      [price]="card.price"
+      [conditions]="card.conditions"
+      [others]="card.others"
+      [colorHeader]="card.colorHeader"
+      (onSelect)="onCardSelected($event)"
+    ></lib-class-card>
+  }
+
+  <div class="class-info">
+    <h1 class="class-info__title">Detalle de tarifas</h1>
+    <ul class="class-info__list">
+      <li class="class-info__item">El primer cambio sin penalidad es aplicable si se realiza al menos ocho días antes de la fecha de salida*.</li>
+      <li class="class-info__item">Los beneficios PreferMember varían dependiendo del <span>estatus del miembro.</span> Los PreferMembers Silver que compren tarifas Economy Basic no son elegibles para ascensos de cortesía**.</li>
+      <li class="class-info__item">Los precios mostrados incluyen cargos de combustible, impuestos y tasas.</li>
+      <li class="class-info__item">Consulta nuestra <span>política de equipaje</span> para vuelos operados por Copa Airlines. Pueden aplicar cargos adicionales en maletas extras, con sobrepeso, o sobredimensión, así como a ciertos artículos especiales.</li>
+      <li class="class-info__item">Si seleccionas <span>familias tarifarias</span> diferentes en tu vuelo de ida y de regreso, se aplicarán los atributos más restrictivos.</li>
+      <li class="class-info__item">No presentarse al vuelo conlleva penalidades.</li>
+    </ul>
+  </div>
+</div>

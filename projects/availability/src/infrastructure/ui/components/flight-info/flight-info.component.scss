@@ -1,0 +1,254 @@
+@use "../../../../../../shared/src/infrastructure/ui/styles/variables.scss" as variables;
+@use "../../../../../../shared/src/infrastructure/ui/styles/mixins.scss" as mixins;
+
+.flight {
+  @include mixins.typography-base;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid variables.$gray-light;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+
+  &__detail {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+
+    &-header {
+      font-size: 1.4rem;
+      color: variables.$gray-dark;
+    }
+
+    &-main {
+      &-hours {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.8rem;
+        font-weight: 600;
+        padding-top: 10px;
+
+        &-line {
+          width: 80px;
+          height: 1px;
+          background-color: variables.$gray-light;
+        }
+
+        &-time {
+          color: variables.$gray;
+          font-size: 1.2rem;
+        }
+      }
+
+      &-cities {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 1.4rem;
+      }
+    }
+
+    &-footer {
+      padding-top: 15px;
+      display: flex;
+      justify-content: space-between;
+
+      &-airline {
+        font-size: 1.4rem;
+        color: variables.$gray-dark;
+      }
+
+      &-details {
+        background-color: transparent;
+        border: none;
+        color: variables.$blue-light;
+        font-size: 1.4rem;
+        font-weight: 600;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__class {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+
+    &-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
+      padding: 15px 20px;
+      border: none;
+      border-left: 1px solid variables.$gray-light;
+      background-color: transparent;
+
+      &--economic:hover,
+      &--executive:hover {
+        .flight__class-line {
+          border-color: transparent;
+          position: relative;
+
+          &::before {
+            position: absolute;
+            color: variables.$white;
+            font-size: 1.4rem;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+          }
+        }
+
+        h2,
+        span {
+          color: variables.$white;
+        }
+      }
+
+      &--economic:hover {
+        background-color: variables.$blue;
+
+        .flight__class-line::before {
+          content: "Económica";
+        }
+      }
+
+      &--executive {
+        border-radius: 0 8px 8px 0;
+
+        &:hover {
+          background-color: #072241;
+
+          .flight__class-line::before {
+            content: "Ejecutiva";
+          }
+        }
+      }
+
+      &.selected-economic {
+        background-color: variables.$blue;
+        color: variables.$white;
+
+        .flight__class-line {
+          border-color: transparent;
+          position: relative;
+
+          &::before {
+            content: "Económica";
+            position: absolute;
+            color: variables.$white;
+            font-size: 1.4rem;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+          }
+        }
+
+        h2,
+        span {
+          color: variables.$white;
+        }
+      }
+
+      &.selected-executive {
+        background-color: #072241;
+        color: variables.$white;
+
+        .flight__class-line {
+          border-color: transparent;
+          position: relative;
+
+          &::before {
+            content: "Ejecutiva";
+            position: absolute;
+            color: variables.$white;
+            font-size: 1.4rem;
+            transform: translate(-50%, -50%);
+            font-weight: 600;
+          }
+        }
+
+        h2,
+        span {
+          color: variables.$white;
+        }
+      }
+    }
+
+    &-line {
+      border: 3px solid #9fc3ff;
+      border-radius: 5px;
+      width: 100%;
+
+      &--dark {
+        border-color: #072241;
+      }
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 0;
+    }
+
+    &-title {
+      font-size: 1.4rem;
+      font-weight: normal;
+      color: variables.$gray-dark;
+    }
+
+    &-price {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.class {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+  }
+
+  &-info {
+    padding-bottom: 20px;
+    &__title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: variables.$gray-dark;
+    }
+
+    &__list {
+      padding-left: 20px;
+    }
+
+    &__item {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: variables.$gray;
+
+      span {
+        color: variables.$blue-light;
+      }
+    }
+  }
+}
