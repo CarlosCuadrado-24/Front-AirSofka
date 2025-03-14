@@ -1,37 +1,32 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { UserRegisterComponent } from '../../forms/user-register/user-register.component';
-import { CreateUserUseCase } from '../../../../application/users/create-user.useCase';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../../../domain/model/user.model';
 import { GetByEmailUserUseCase } from '../../../../application/users/get-by-email-user.UseCase';
 import { Observable, of } from "rxjs";
 import { AsyncPipe, NgIf } from '@angular/common';
+import { UserRegisterComponent } from '../../forms/user-register/user-register.component';
+import { UserProfileComponent } from '../../components/user-profile/user-profile.component';
 import { UpdateUserUseCase } from '../../../../application/users/update-user.useCase';
 
-
 @Component({
-  selector: 'lib-register-container',
-  imports: [UserRegisterComponent,AsyncPipe, NgIf],
-  templateUrl: './register-container.component.html',
-  styles: ''
+  selector: 'lib-user-profile-container',
+  imports: [UserRegisterComponent,AsyncPipe, NgIf, UserProfileComponent],
+  templateUrl: './user-profile-container.component.html',
+  styleUrl: './user-profile-container.component.scss'
 })
-export class RegisterContainerComponent implements OnInit, OnDestroy{
+export class UserProfileContainerComponent implements OnInit, OnDestroy{
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  private createUserUseCase = inject(CreateUserUseCase);
   private getByEmailUserUseCase = inject(GetByEmailUserUseCase);
   private updateUserUseCase = inject(UpdateUserUseCase);
-
-  public token?: string;
   public emailUser?: string;
+  public token?: string;
   public user: IUser;
   user$!: Observable<IUser>;
-
   public action: string;
   public actionButton: string;
 
   ngOnInit(): void {
-    this.createUserUseCase.initSubscriptions();
     this.getByEmailUserUseCase.initSubscriptions();
     this.updateUserUseCase.initSubscriptions();
 
@@ -41,11 +36,11 @@ export class RegisterContainerComponent implements OnInit, OnDestroy{
         this.emailUser = emailUserParam;
         this.action = 'update';
         this.loadUserData(this.emailUser);
-        this.actionButton = "Actualizar datos";
         this.token = this.getCookie('AUTH_TOKEN');
+        this.actionButton = "Actualizar datos";
       } else {
         this.user$ = of({} as IUser);
-        this.action = 'save';
+        this.action = '';
         this.actionButton = "Crear Cuenta";
       }
     });
@@ -54,12 +49,15 @@ export class RegisterContainerComponent implements OnInit, OnDestroy{
   private loadUserData(email: string): void {
     this.getByEmailUserUseCase.execute(email);
     this.user$ = this.getByEmailUserUseCase.user$();
-    this.updateUserUseCase.destroySubscriptions();
   }
 
   ngOnDestroy(): void {
-    this.createUserUseCase.destroySubscriptions();
+    this.updateUserUseCase.destroySubscriptions();
     this.getByEmailUserUseCase.destroySubscriptions();
+  }
+
+  handleUpdateUser(email: string) {
+    this.router.navigate(['users/update',email]);
   }
 
   getCookie(name: string): string | null {
@@ -70,25 +68,20 @@ export class RegisterContainerComponent implements OnInit, OnDestroy{
   }
 
   handleSubmit(user: IUser) {
-    if (this.action === 'update') {
-      if(this.token!=null){
-        this.updateUserUseCase.execute(this.token, user).subscribe({
-          next: (user) => {
-            this.router.navigate(['/']);
-          },
-          error: (err) => {
-              console.error('Error al actualizar usuario:', err);
-          }
-      });
-        console.log('token: ',this.token);
-      }
-    } else {
-      this.createUserUseCase.execute(user).subscribe({
-        next: () => this.router.navigate(['users/login']),
-        error: (err) => console.error('Error al registrar el usuario', err),
-      });
-    }
-    console.log("usuario: ",user);
+    if (this.action === 'update' && this.token!=null ) {
+      this.updateUserUseCase.execute(this.token, user).subscribe({
+        next: (user) => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+            console.error('Error al actualizar usuario:', err);
+        }
+    });
+      console.log("se metio para actualizar");
+      
+      // console.log (user);
+    } 
+    console.log("token: ");
   }
 
 }

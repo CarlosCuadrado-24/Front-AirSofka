@@ -14,7 +14,7 @@ export class UserRegisterComponent {
   private formBuilder = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
   @Input() user: IUser | null = null;
-
+  @Input() actionButton: string;
   @Output() onSubmit = new EventEmitter<IUser>();
 
 

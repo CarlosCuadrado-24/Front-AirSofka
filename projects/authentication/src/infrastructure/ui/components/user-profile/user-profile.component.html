@@ -1,0 +1,28 @@
+<article class="profile" itemscope itemtype="https://schema.org/Person">
+    <header class="profile__header">
+        <h1 class="profile__title" itemprop="name">{{user.name}}</h1>
+    </header>
+
+    <section class="profile__body">
+        <div class="profile__info">
+            <span class="profile__info-label">Documento ID:</span>
+            <span class="profile__info-value">{{user.documentId}}</span>
+        </div>
+        <hr/>
+        <div class="profile__info">
+            <span class="profile__info-label">Email:</span>
+            <span class="profile__info-value">{{user.email}}</span>
+        </div>
+        <hr/>
+        <div class="profile__info">
+            <span class="profile__info-label">Teléfono:</span>
+            <span class="profile__info-value" itemprop="numero">{{user.phoneNumber}}</span>
+        </div>
+        <hr/>
+        <div class="profile__info">
+            <span class="profile__info-label">Nacionalidad:</span>
+            <span class="profile__info-value" itemprop="nationality">{{user.nacionality}}</span>
+        </div>
+    </section>
+    <button class="profile__button" (click)="updateUser(user.email)"> Actualizar datos</button>
+</article>

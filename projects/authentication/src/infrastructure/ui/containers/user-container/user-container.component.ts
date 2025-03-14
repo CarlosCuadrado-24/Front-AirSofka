@@ -5,6 +5,7 @@ import { ListUsersUseCase } from '../../../../application/users/list-user.useCas
 import { UserDashboardComponent } from '../../components/user-dashboard/user-dashboard.component';
 import { CreateUserUseCase } from '../../../../application/users/create-user.useCase';
 import { AsyncPipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'lib-users-container',
@@ -12,7 +13,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './user-container.component.html',
 })
 export class UsersContainerComponent implements OnInit, OnDestroy {
-
+  private router = inject(Router);
   private readonly _getUseCase = inject(ListUsersUseCase);
   private readonly _createUseCase = inject(CreateUserUseCase);
   public users$: Observable<IUser[]>;
@@ -32,4 +33,11 @@ export class UsersContainerComponent implements OnInit, OnDestroy {
   handleCreateUser(user: IUser) {
     this._createUseCase.execute(user);
   }
+
+  handleUpdateUser(email: string) {
+    this.router.navigate(['users/update',email]);
+  }
+
+  
+
 }

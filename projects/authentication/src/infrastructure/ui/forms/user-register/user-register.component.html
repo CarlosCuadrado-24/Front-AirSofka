@@ -6,13 +6,9 @@
             <div>
                 <label class="form__label">
                     <span>Nombre:</span>
-                    <input 
-                        type="text" 
-                        formControlName="name" 
-                        class="form__input"
+                    <input type="text" formControlName="name" class="form__input"
                         [class.input-error]="form.get('name')?.invalid && form.get('name')?.touched"
-                        placeholder="Ingrese su nombre completo"
-                    />
+                        placeholder="Ingrese su nombre completo" />
                     <small class="error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
                         Nombre inválido (solo letras).
                     </small>
@@ -20,13 +16,9 @@
 
                 <label class="form__label">
                     <span>Nacionalidad:</span>
-                    <input 
-                        type="text" 
-                        formControlName="nacionality" 
-                        class="form__input"
+                    <input type="text" formControlName="nacionality" class="form__input"
                         [class.input-error]="form.get('nacionality')?.invalid && form.get('nacionality')?.touched"
-                        placeholder="Ingrese su país de residencia"
-                    />
+                        placeholder="Ingrese su país de residencia" />
                     <small class="error" *ngIf="form.get('nacionality')?.invalid && form.get('nacionality')?.touched">
                         Nacionalidad inválida (solo letras).
                     </small>
@@ -36,13 +28,9 @@
             <div>
                 <label class="form__label">
                     <span>ID de Documento:</span>
-                    <input 
-                        type="text" 
-                        formControlName="documentId" 
-                        class="form__input"
+                    <input type="text" formControlName="documentId" class="form__input"
                         [class.input-error]="form.get('documentId')?.invalid && form.get('documentId')?.touched"
-                        placeholder="Ingrese su documento de identidad"
-                    />
+                        placeholder="Ingrese su documento de identidad" />
                     <small class="error" *ngIf="form.get('documentId')?.invalid && form.get('documentId')?.touched">
                         Este campo es obligatorio.
                     </small>
@@ -50,13 +38,9 @@
 
                 <label class="form__label">
                     <span>Teléfono:</span>
-                    <input 
-                        type="tel" 
-                        formControlName="phoneNumber" 
-                        class="form__input"
+                    <input type="tel" formControlName="phoneNumber" class="form__input"
                         [class.input-error]="form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched"
-                        placeholder="Ingrese su número de teléfono"
-                    />
+                        placeholder="Ingrese su número de teléfono" />
                     <small class="error" *ngIf="form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched">
                         Ingrese un número válido (solo números y +).
                     </small>
@@ -72,13 +56,9 @@
         <div class="form__credentials">
             <label class="form__label">
                 <span>Email:</span>
-                <input 
-                    type="email" 
-                    formControlName="email" 
-                    class="form__input"
+                <input type="email" formControlName="email" class="form__input"
                     [class.input-error]="form.get('email')?.invalid && form.get('email')?.touched"
-                    placeholder="Ingrese su correo electrónico"
-                />
+                    placeholder="Ingrese su correo electrónico" />
                 <small class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
                     Ingrese un correo válido.
                 </small>
@@ -86,22 +66,22 @@
 
             <label class="form__label">
                 <span>Contraseña:</span>
-                <input 
-                    type="password" 
-                    formControlName="password" 
-                    class="form__input"
+                <input type="password" formControlName="password" class="form__input"
                     [class.input-error]="form.get('password')?.invalid && form.get('password')?.touched"
-                    placeholder="Ingrese su contraseña"
-                />
+                    placeholder="Ingrese su contraseña" />
                 <small class="error" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
                     Mínimo 5 caracteres.
                 </small>
             </label>
         </div>
-        <a href="http://localhost:8080/oauth2/authorization/google" aria-label="Registrarse" class="google-login-button">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Google" class="google-login-button__image" />
+        @if(actionButton==="Crear Cuenta"){
+        <a href="http://localhost:8080/oauth2/authorization/google" aria-label="Registrarse"
+            class="google-login-button">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png"
+                alt="Google" class="google-login-button__image" />
             Registrarse Con Google
         </a>
-        <button type="submit" class="form__button" aria-label="send form">Crear Cuenta</button>
+        }
+        <button type="submit" class="form__button" aria-label="send form">{{actionButton}}</button>
     </form>
 </section>

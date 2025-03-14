@@ -1,1 +1,1 @@
-<lib-user-register *ngIf="user$ | async as user" [user]="user" (onSubmit)="handleSubmit($event)"></lib-user-register>
+<lib-user-register *ngIf="user$ | async as user" [user]="user" [actionButton]="actionButton" (onSubmit)="handleSubmit($event)"></lib-user-register>
